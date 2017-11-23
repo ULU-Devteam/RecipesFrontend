@@ -23,7 +23,15 @@ export class RecipeDetailComponent implements OnInit {
       .subscribe(
         (params: Params) => {
           this.id = +params['id'];
-          this.recipe = this.recipeService.getRecipe(this.id);
+          // this.recipe = this.recipeService.getRecipe(this.id);
+        }
+      );
+
+    this.recipeService.getRecipe(this.id)
+      .subscribe(
+        (response)=>{
+          this.recipe = response.json();
+          console.log('res: ' + response.json());
         }
       );
   }
