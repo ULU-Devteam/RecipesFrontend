@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import {Http} from "@angular/http";
 
 @Injectable()
 export class RecipeService {
@@ -27,7 +28,7 @@ export class RecipeService {
       ])
   ];
 
-  constructor(private slService: ShoppingListService) {}
+  constructor(private slService: ShoppingListService, private http: Http) {}
 
   getRecipes() {
     return this.recipes.slice();
@@ -42,8 +43,10 @@ export class RecipeService {
   }
 
   addRecipe(recipe: Recipe) {
-    this.recipes.push(recipe);
-    this.recipesChanged.next(this.recipes.slice());
+    // this.recipes.push(recipe);
+    // this.recipesChanged.next(this.recipes.slice());
+
+    return this.http.post('http://localhost:3000/api/recipes', recipe)
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
