@@ -65,14 +65,12 @@ export class RecipeService {
 
   }
 
-  updateRecipe(index: number, newRecipe: Recipe) {
-    this.recipes[index] = newRecipe;
-    this.recipesChanged.next(this.recipes.slice());
+  updateRecipe(id: number, newRecipe: Recipe) {
+    return this.http.put('http://localhost:3000/api/recipes/' + id, newRecipe);
   }
 
-  deleteRecipe(index: number) {
-    this.recipes.splice(index, 1);
-    this.recipesChanged.next(this.recipes.slice());
+  deleteRecipe(id: number) {
+    return this.http.delete('http://localhost:3000/api/recipes/' + id)
   }
 
   private handleError(error: any): Promise<any> {

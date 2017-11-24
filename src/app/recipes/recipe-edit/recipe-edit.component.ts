@@ -13,6 +13,7 @@ export class RecipeEditComponent implements OnInit {
   id: number;
   editMode = false;
   recipeForm: FormGroup;
+  index = this.id;
 
   constructor(private route: ActivatedRoute,
               private recipeService: RecipeService,
@@ -37,7 +38,14 @@ export class RecipeEditComponent implements OnInit {
     //   this.recipeForm.value['imagePath'],
     //   this.recipeForm.value['ingredients']);
     if (this.editMode) {
-      this.recipeService.updateRecipe(this.id, this.recipeForm.value);
+      this.recipeService.updateRecipe(this.id, this.recipeForm.value)
+        .subscribe((response) => {
+          this.recipeService.getRecipes()
+            .subscribe((response) => {
+              this.recipeService.setRecipes(response.json());
+              this.onCancel();
+            })
+        })
     } else {
       this.recipeService.addRecipe(this.recipeForm.value)
         .subscribe(
@@ -46,11 +54,12 @@ export class RecipeEditComponent implements OnInit {
             this.recipeService.getRecipes()
               .subscribe((response) => {
                 this.recipeService.setRecipes(response.json());
+                this.onCancel();
               })
           }
         );
     }
-    this.onCancel();
+
   }
 
   onAddIngredient() {
@@ -80,23 +89,24 @@ export class RecipeEditComponent implements OnInit {
     let recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      // const recipe = this.recipeService.getRecipe(this.id);
-      // recipeName = recipe.name;
-      // recipeImagePath = recipe.imagePath;
-      // recipeDescription = recipe.description;
-      // if (recipe['ingredients']) {
-      //   for (let ingredient of recipe.ingredients) {
-      //     recipeIngredients.push(
-      //       new FormGroup({
-      //         'name': new FormControl(ingredient.name, Validators.required),
-      //         'amount': new FormControl(ingredient.amount, [
-      //           Validators.required,
-      //           Validators.pattern(/^[1-9]+[0-9]*$/)
-      //         ])
-      //       })
-      //     );
-      //   }
-      // }
+      const recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.name;
+      recipeImagePath = recipe.imagePath;
+      recipeDescription = recipe.description;
+      this.id = recipe['_id'];
+      if (recipe['ingredients']) {
+        for (let ingredient of recipe.ingredients) {
+          recipeIngredients.push(
+            new FormGroup({
+              'name': new FormControl(ingredient.name, Validators.required),
+              'amount': new FormControl(ingredient.amount, [
+                Validators.required,
+                Validators.pattern(/^[1-9]+[0-9]*$/)
+              ])
+            })
+          );
+        }
+      }
     }
 
     this.recipeForm = new FormGroup({
