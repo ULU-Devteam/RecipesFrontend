@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import { Recipe } from './recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
-import {Http} from "@angular/http";
+import {Http} from '@angular/http';
 
 @Injectable()
 export class RecipeService {
@@ -31,24 +31,22 @@ export class RecipeService {
 
   constructor(private slService: ShoppingListService, private http: Http) {}
 
-  setRecipes(recipes: Recipe[]){
-    this.recipes = recipes
-    this.recipesChanged.next(this.recipes.slice())
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
   }
 
-  getRecipes(){
-    return this.http.get('http://localhost:3000/api/recipes')
-    //return this.recipes.slice();
+  getRecipes() {
+    return this.http.get('http://localhost:3000/api/recipes');
+    // return this.recipes.slice();
   }
 
-  getRecipeFromList(){
-    return this.recipes.slice()
+  getRecipeFromList() {
+    return this.recipes.slice();
   }
 
-
-
-  getRecipe(index: number){
-    //return this.http.get('http://localhost:3000/api/recipes/' + index )
+  getRecipe(index: number) {
+    // return this.http.get('http://localhost:3000/api/recipes/' + index )
     return this.recipes[index];
 
   }
@@ -61,7 +59,7 @@ export class RecipeService {
     // this.recipes.push(recipe);
     // this.recipesChanged.next(this.recipes.slice());
 
-    return this.http.post('http://localhost:3000/api/recipes', recipe)
+    return this.http.post('http://localhost:3000/api/recipes', recipe);
 
   }
 
@@ -70,7 +68,7 @@ export class RecipeService {
   }
 
   deleteRecipe(id: number) {
-    return this.http.delete('http://localhost:3000/api/recipes/' + id)
+    return this.http.delete('http://localhost:3000/api/recipes/' + id);
   }
 
   private handleError(error: any): Promise<any> {

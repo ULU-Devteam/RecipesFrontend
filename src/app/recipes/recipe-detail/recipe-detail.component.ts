@@ -51,10 +51,10 @@ export class RecipeDetailComponent implements OnInit {
         this.recipeService.getRecipes()
           .subscribe((response) => {
             this.recipeService.setRecipes(response.json());
-            this.router.navigate(['/recipes'])
+            this.router.navigate(['/recipes']);
 
-          })
-      })
+          });
+      });
 
 
   }
