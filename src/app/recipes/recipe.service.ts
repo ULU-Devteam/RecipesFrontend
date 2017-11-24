@@ -31,16 +31,25 @@ export class RecipeService {
 
   constructor(private slService: ShoppingListService, private http: Http) {}
 
+  setRecipes(recipes: Recipe[]){
+    this.recipes = recipes
+    this.recipesChanged.next(this.recipes.slice())
+  }
+
   getRecipes(){
     return this.http.get('http://localhost:3000/api/recipes')
     //return this.recipes.slice();
   }
 
+  getRecipeFromList(){
+    return this.recipes.slice()
+  }
+
 
 
   getRecipe(index: number){
-    return this.http.get('http://localhost:3000/api/recipes/' + index )
-     //return this.recipes[index];
+    //return this.http.get('http://localhost:3000/api/recipes/' + index )
+    return this.recipes[index];
 
   }
 
@@ -53,6 +62,7 @@ export class RecipeService {
     // this.recipesChanged.next(this.recipes.slice());
 
     return this.http.post('http://localhost:3000/api/recipes', recipe)
+
   }
 
   updateRecipe(index: number, newRecipe: Recipe) {
