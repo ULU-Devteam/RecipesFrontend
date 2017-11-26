@@ -44,8 +44,8 @@ export class RecipeEditComponent implements OnInit {
             .subscribe((response) => {
               this.recipeService.setRecipes(response.json());
               this.onCancel();
-            })
-        })
+            });
+        });
     } else {
       this.recipeService.addRecipe(this.recipeForm.value)
         .subscribe(
@@ -55,7 +55,7 @@ export class RecipeEditComponent implements OnInit {
               .subscribe((response) => {
                 this.recipeService.setRecipes(response.json());
                 this.onCancel();
-              })
+              });
           }
         );
     }
