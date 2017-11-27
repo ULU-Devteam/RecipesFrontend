@@ -26,23 +26,20 @@ export class RecipeDetailComponent implements OnInit {
           this.recipe = this.recipeService.getRecipe(this.id);
         }
       );
-    //
-    // this.recipeService.getRecipe(this.id)
-    //   .subscribe(
-    //     (response)=>{
-    //       this.recipe = response.json();
-    //       console.log('res: ' + response.json());
-    //     }
-    //   );
+
   }
 
   onAddToShoppingList() {
-    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+    this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients)
+      .subscribe(
+        (result) => {
+
+        }
+      )
   }
 
   onEditRecipe() {
     this.router.navigate(['edit'], {relativeTo: this.route});
-    // this.router.navigate(['../', this.id, 'edit'], {relativeTo: this.route});
   }
 
   onDeleteRecipe() {

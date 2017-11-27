@@ -80,7 +80,7 @@ export class ShoppingListService {
   deleteIngredient(index: number) {
 
     const id = this.ingredients[index]['_id'];
-    this.http.delete('http://localhost:3000/api/shoppingList/ingredient/' + id)
+    this.http.delete('https://recipenosql.herokuapp.com/api/shoppingList/ingredient/' + id)
       .subscribe(() => {
         this.ingredients.splice(index, 1);
         this.ingredientsChanged.next(this.ingredients.slice());
