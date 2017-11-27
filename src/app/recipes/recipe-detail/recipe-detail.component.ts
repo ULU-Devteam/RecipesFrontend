@@ -4,6 +4,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
+import { NgForm } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+
+import { Ingredient } from '../../shared/ingredient.model';
+
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
@@ -32,10 +37,11 @@ export class RecipeDetailComponent implements OnInit {
   onAddToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients)
       .subscribe(
-        (result) => {
-          console.log(result)
-        }
-      )
+        (response) => {
+          console.log(response);
+        },
+        (error) => console.log(error)
+      );
   }
 
   onEditRecipe() {
