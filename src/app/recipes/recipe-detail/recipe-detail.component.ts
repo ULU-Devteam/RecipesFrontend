@@ -33,7 +33,7 @@ export class RecipeDetailComponent implements OnInit {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients)
       .subscribe(
         (result) => {
-          console.log(result.json())
+          console.log(result)
         }
       )
   }
