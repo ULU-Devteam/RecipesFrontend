@@ -37,7 +37,7 @@ export class RecipeService {
   }
 
   getRecipes() {
-    return this.http.get('http://localhost:3000/api/recipes');
+    return this.http.get('https://recipenosql.herokuapp.com/api/recipes');
     // return this.recipes.slice();
   }
 
@@ -59,16 +59,16 @@ export class RecipeService {
     // this.recipes.push(recipe);
     // this.recipesChanged.next(this.recipes.slice());
 
-    return this.http.post('http://localhost:3000/api/recipes', recipe);
+    return this.http.post('https://recipenosql.herokuapp.com/api/recipes', recipe);
 
   }
 
   updateRecipe(id: number, newRecipe: Recipe) {
-    return this.http.put('http://localhost:3000/api/recipes/' + id, newRecipe);
+    return this.http.put('https://recipenosql.herokuapp.com/api/recipes/' + id, newRecipe);
   }
 
   deleteRecipe(id: number) {
-    return this.http.delete('http://localhost:3000/api/recipes/' + id);
+    return this.http.delete('https://recipenosql.herokuapp.com/api/recipes/' + id);
   }
 
   private handleError(error: any): Promise<any> {

@@ -23,7 +23,7 @@ export class ShoppingListService {
 
   getIngredients() {
 
-    return this.http.get('http://localhost:3000/api/shoppingList')
+    return this.http.get('https://recipenosql.herokuapp.com/api/shoppingList')
       .map(
         (response: Response) => {
           const data = response.json();
@@ -42,7 +42,7 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
 
-    return this.http.post('http://localhost:3000/api/shoppingList/ingredient', ingredient, {headers: this.headers})
+    return this.http.post('https://recipenosql.herokuapp.com/api/shoppingList/ingredient', ingredient, {headers: this.headers})
       .map(
         (response: Response) => {
           const data = response.json();
@@ -55,7 +55,7 @@ export class ShoppingListService {
 
   addIngredients(ingredients: Ingredient[]) {
 
-    return this.http.post('http://localhost:3000/api/shoppingList/ingredient', ingredients, {headers: this.headers})
+    return this.http.post('https://recipenosql.herokuapp.com/api/shoppingList/ingredient', ingredients, {headers: this.headers})
       .map(
         (response: Response) => {
           const data = response.json();
@@ -68,7 +68,7 @@ export class ShoppingListService {
   updateIngredient(index: number, newIngredient: Ingredient) {
 
     const id = this.ingredients[index]['_id'];
-    this.http.put('http://localhost:3000/api/shoppingList/ingredient/' + id, newIngredient)
+    this.http.put('https://recipenosql.herokuapp.com/api/shoppingList/ingredient/' + id, newIngredient)
       .subscribe(() => {
         this.ingredients[index].name = newIngredient.name;
         this.ingredients[index].amount = newIngredient.amount;
